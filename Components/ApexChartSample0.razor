@@ -1,0 +1,142 @@
+﻿@using ApexCharts
+
+<div class="d-flex flex-justify-between flex-items-center mb-2">
+    <div>
+        <h5 class="m-0">Sales & Customer Metrics</h5>
+        <p class="color-fg-subtle f6 m-0">This chart summarizes revenue, visitor count, and conversion rate across all channels.</p>
+    </div>
+    <select class="form-select form-select-sm">
+        <option>Jan - Dec 2025</option>
+        <option>Jan - Dec 2024</option>
+        <option>Jan - Dec 2023</option>
+    </select>
+</div>
+
+<PrimerApexChart Title="Sales Chart"
+                 SeriesName="Monthly Sales"
+                 Width="100%"
+                 Height="370px"
+                 SeriesType="SeriesType.Line"
+                 ChartOptions="@MyOptions"
+                 SeriesData="@multiSeries"
+                 ShowTitleName="false"
+                 ShowSeriesName="false" />
+
+@code {
+    private Dictionary<string, List<DataPoint>> multiSeries = new()
+        {
+            ["Sales"] = new()
+        {
+            new() { X = "Jan", Y = 300 },
+            new() { X = "Feb", Y = 400 },
+            new() { X = "Mar", Y = 450 },
+            new() { X = "Apr", Y = 500 },
+            new() { X = "May", Y = 480 },
+            new() { X = "Jun", Y = 520 },
+            new() { X = "Jul", Y = 550 },
+            new() { X = "Aug", Y = 530 },
+            new() { X = "Sep", Y = 600 },
+            new() { X = "Oct", Y = 650 },
+            new() { X = "Nov", Y = 670 },
+            new() { X = "Dec", Y = 700 }
+        },
+            ["Visitors"] = new()
+        {
+            new() { X = "Jan", Y = 800 },
+            new() { X = "Feb", Y = 600 },
+            new() { X = "Mar", Y = 300 },
+            new() { X = "Apr", Y = 200 },
+            new() { X = "May", Y = 250 },
+            new() { X = "Jun", Y = 300 },
+            new() { X = "Jul", Y = 400 },
+            new() { X = "Aug", Y = 450 },
+            new() { X = "Sep", Y = 500 },
+            new() { X = "Oct", Y = 550 },
+            new() { X = "Nov", Y = 600 },
+            new() { X = "Dec", Y = 650 }
+        },
+            ["Conversion Rate"] = new()
+        {
+            new() { X = "Jan", Y = 3.2m },
+            new() { X = "Feb", Y = 3.5m },
+            new() { X = "Mar", Y = 2.8m },
+            new() { X = "Apr", Y = 2.5m },
+            new() { X = "May", Y = 3.0m },
+            new() { X = "Jun", Y = 3.6m },
+            new() { X = "Jul", Y = 3.9m },
+            new() { X = "Aug", Y = 4.2m },
+            new() { X = "Sep", Y = 4.5m },
+            new() { X = "Oct", Y = 4.7m },
+            new() { X = "Nov", Y = 4.8m },
+            new() { X = "Dec", Y = 5.0m }
+        }
+        };
+
+    ApexChartOptions<DataPoint> MyOptions = new()
+        {
+            Chart = new ApexCharts.Chart
+            {
+                Type = ChartType.Line,
+                Width = "100%",
+                Toolbar = new Toolbar
+                {
+                    Show = false,
+                    Tools = new Tools
+                    {
+                        Download = true,
+                        Selection = true,
+                        Zoom = true,
+                        Zoomin = true,
+                        Zoomout = true,
+                        Pan = true,
+                        Reset = true
+                    },
+                },
+            },
+            Xaxis = new XAxis
+            {
+                Labels = new XAxisLabels
+                {
+                    Rotate = -45
+                },
+            },
+            Yaxis = new List<YAxis>
+        {
+            new()
+            {
+                Opposite = false,
+                Title = new AxisTitle { Text = "Unit: People / KRW" },
+                Labels = new YAxisLabels
+                {
+                    Formatter = "function(val) { return val.toFixed(0); }"
+                }
+            },
+            new()
+            {
+                Show = false,
+                Opposite = false,
+                Title = new AxisTitle { Text = "Unit: People / KRW" },
+                Labels = new YAxisLabels
+                {
+                    Formatter = "function(val) { return val.toFixed(0); }"
+                }
+            },
+            new()
+            {
+                Opposite = true,
+                Title = new AxisTitle { Text = "Conversion Rate (%)" },
+                Labels = new YAxisLabels
+                {
+                    Formatter = "function(val) { return val.toFixed(1) + '%' }"
+                },
+                Min = 0,
+                Max = 10
+            }
+        },
+            Colors = new List<string> { "#1f6feb", "#cdd9e5", "#8cb4ff" },
+            Legend = new Legend
+            {
+                Show = false
+            }
+        };
+}

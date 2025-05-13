@@ -1,0 +1,77 @@
+﻿@using ApexCharts
+
+<PrimerCard>
+    <div class="d-flex flex-justify-between">
+        <strong>New Customers <span class="Label Label--success text-xs">+26.5%</span></strong>
+        <div class="text-xl text-bold">356</div>
+    </div>
+
+    <div class="color-fg-muted text-xs mb-2">Last 7 Days</div>
+
+    <PrimerApexChart Width="100%" Height="100px"
+                     ChartOptions="@ChartOptions"
+                     SeriesData="@ChartData"
+                     ShowTitleName="false"
+                     ShowSeriesName="false"
+                     SeriesType="SeriesType.Line" />
+</PrimerCard>
+
+@code {
+    private Dictionary<string, List<DataPoint>> ChartData = new()
+        {
+            ["This Week"] = new()
+        {
+            new() { X = "May 1", Y = 5 },
+            new() { X = "May 2", Y = 7 },
+            new() { X = "May 3", Y = 4 },
+            new() { X = "May 4", Y = 10 },
+            new() { X = "May 5", Y = 8 },
+            new() { X = "May 6", Y = 9 },
+            new() { X = "May 7", Y = 12 }
+        },
+            ["Last Week"] = new()
+        {
+            new() { X = "May 1", Y = 4 },
+            new() { X = "May 2", Y = 5 },
+            new() { X = "May 3", Y = 6 },
+            new() { X = "May 4", Y = 7 },
+            new() { X = "May 5", Y = 6 },
+            new() { X = "May 6", Y = 6 },
+            new() { X = "May 7", Y = 7 }
+        }
+        };
+
+    private ApexChartOptions<DataPoint> ChartOptions = new()
+        {
+            Chart = new Chart
+            {
+                Type = ChartType.Line,
+                Toolbar = new Toolbar { Show = false },
+                Zoom = new Zoom { Enabled = false },
+                Sparkline = new ChartSparkline { Enabled = false }
+            },
+            Stroke = new Stroke
+            {
+                Curve = Curve.Straight,
+                Width = new List<int> { 2, 2 }
+            },
+            Colors = new() { "#1f6feb", "#e1e4e8" },
+            Xaxis = new XAxis
+            {
+                Labels = new XAxisLabels
+                {
+                    Show = true,
+                    Style = new AxisLabelStyle
+                    {
+                        Colors = new List<string> { "#57606a" },
+                        FontSize = "10px"
+                    }
+                },
+                AxisBorder = new AxisBorder { Show = false },
+                AxisTicks = new AxisTicks { Show = false }
+            },
+            Yaxis = new List<YAxis> { new() { Show = false } },
+            Grid = new Grid { Show = false },
+            Legend = new Legend { Show = false }
+        };
+}

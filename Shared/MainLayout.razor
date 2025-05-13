@@ -1,0 +1,207 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+
+<PrimerBrandBox Style="display: flex; height: 100vh; overflow: hidden;">
+    <!-- Sidebar -->
+    <PrimerBrandBox Style="width: 250px; overflow:hidden; overflow-y: auto;" DesktopOnly="true" Padding="BrandBoxPadding.Padding16" Background="BrandBoxBackground.Subtle">
+        <PrimerBrandBox Background="BrandBoxBackground.Default"
+                        BorderRadius="BrandBoxBorderRadius.Medium"
+                        BorderColor="BrandBoxBorderColor.Muted"
+                        BorderWidth="BrandBoxBorderWidth.Thin"
+                        BorderStyle="BrandBoxBorderStyle.Solid"
+                        Padding="BrandBoxPadding.Padding16"
+                        Style="min-height: 100%;">
+            <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackDirection.Vertical } })"
+                              JustifyContentMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackJustifyContent.SpaceBetween } })"
+                              Style="height: 100%; min-width: 200px;">
+                <!-- Sidebar Header -->
+                <PrimerStack Direction="StackDirection.Column">
+                    <PrimerBrandLink Href="/" Color="BrandLinkColor.Default" ArrowDirection="BrandLinkArrowDirection.None" DisableUnderline="true">
+                        <PrimerImage Src="/images/logo_small.png" IsCircle="true" Width="15" Height="15" ClassName="mr-1"></PrimerImage>
+                        <PrimerBrandText Size="BrandTextSize._100" Weight="BrandTextWeight.Semibold">Primer Blazor</PrimerBrandText>
+                    </PrimerBrandLink>
+                    <PrimerDivider Direction="DividerDirection.Horizontal" />
+
+                    <!-- Navigation -->
+                    <PrimerNavList>
+                        <PrimerNavListItem Href="javascript:void(0);" State="NavListItemState.Active">
+                            <PrimerNavListLeadingVisual>
+                                <PrimerIcon Icon="IconName.Browser16" Size="IconSize.Small" />
+                            </PrimerNavListLeadingVisual>
+                            <PrimerNavListLabel>Sales</PrimerNavListLabel>
+                        </PrimerNavListItem>
+
+                        <PrimerNavListItem Href="/product" Target="_brank">
+                            <PrimerNavListLeadingVisual>
+                                <PrimerIcon Icon="IconName.Rocket16" Size="IconSize.Small" />
+                            </PrimerNavListLeadingVisual>
+                            <PrimerNavListLabel>
+                                Landing-Product
+                                <PrimerIcon Icon="@IconName.LinkExternal16" Size="IconSize.Small" ClassName="text-muted" />
+                            </PrimerNavListLabel>
+                        </PrimerNavListItem>
+
+                        <PrimerNavListDivider />
+                        <PrimerNavListDivider Title="Pages" />
+
+                        <PrimerNavListItem Href="javascript:void(0);">
+                            <PrimerNavListLeadingVisual>
+                                <PrimerIcon Icon="IconName.Package16" Size="IconSize.Small" />
+                            </PrimerNavListLeadingVisual>
+                            <PrimerNavListLabel>Menu 1</PrimerNavListLabel>
+                        </PrimerNavListItem>
+
+                        <!-- Toggle Group -->
+                        <PrimerNavListItem IsButton="true" IsToggle="true"
+                                           IsOpen="@GetToggleState("Authentication")"
+                                           IsOpenChanged="@(v => toggleStates["Authentication"] = v)">
+                            <PrimerNavListLeadingVisual>
+                                <PrimerIcon Icon="IconName.Package16" Size="IconSize.Small" />
+                            </PrimerNavListLeadingVisual>
+                            <PrimerNavListLabel>Menu 2</PrimerNavListLabel>
+                            <PrimerNavListTrailingVisual>
+                                <PrimerIcon Icon="@(GetToggleState("Authentication") ? IconName.ChevronUp16 : IconName.ChevronDown16)" Size="IconSize.Small" />
+                            </PrimerNavListTrailingVisual>
+
+                            <PrimerNavListSubGroup>
+                                <PrimerNavListItem Href="javascript:void(0);">
+                                    <PrimerNavListLeadingVisual>
+                                        <PrimerIcon Icon="IconName.MarkGithub16" Size="IconSize.Small" />
+                                    </PrimerNavListLeadingVisual>
+                                    <PrimerNavListLabel>Sub Menu1</PrimerNavListLabel>
+                                </PrimerNavListItem>
+                                <PrimerNavListItem Href="javascript:void(0);">
+                                    <PrimerNavListLeadingVisual>
+                                        <PrimerIcon Icon="IconName.MarkGithub16" Size="IconSize.Small" />
+                                    </PrimerNavListLeadingVisual>
+                                    <PrimerNavListLabel>Sub Menu2</PrimerNavListLabel>
+                                </PrimerNavListItem>
+                            </PrimerNavListSubGroup>
+                        </PrimerNavListItem>
+                    </PrimerNavList>
+                </PrimerStack>
+
+                <!-- Sidebar Footer -->
+                <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackDirection.Vertical } })"
+                                  GapMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackGap.Gap8 } })">
+                    <PrimerButton Variant="ButtonVariant.Default" Size="ButtonSize.Small" @onclick="() => OpenExternalLink()">Documentation</PrimerButton>
+                </PrimerBrandStack>
+            </PrimerBrandStack>
+        </PrimerBrandBox>
+    </PrimerBrandBox>
+
+    <!-- Main Content -->
+    <PrimerBrandBox Style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+        <!-- Top Header -->
+        <PrimerBrandBox Padding="BrandBoxPadding.Padding16" Background="BrandBoxBackground.Subtle">
+            <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackDirection.Horizontal } })"
+                              JustifyContentMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackJustifyContent.SpaceBetween } })"
+                              AlignItemsMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackAlignItems.Center } })">
+
+                <PrimerBrandLink Href="/" Color="BrandLinkColor.Default" ArrowDirection="BrandLinkArrowDirection.None" DisableUnderline="true" MobileOnly="true">
+                    <PrimerImage Src="/images/logo_small.png" IsCircle="true" Width="15" Height="15" ClassName="mr-1"></PrimerImage>
+                    <PrimerBrandText Size="BrandTextSize._100" Weight="BrandTextWeight.Semibold">Primer Blazor</PrimerBrandText>
+                </PrimerBrandLink>
+
+                <PrimerBrandBreadcrumbs Type="BrandBreadcrumbsType.Default" DesktopOnly="true">
+                    <PrimerBrandBreadcrumbsItem Href="javascript:void(0);">Pages</PrimerBrandBreadcrumbsItem>
+                    <PrimerBrandBreadcrumbsItem IsSelected="true">Dashboard</PrimerBrandBreadcrumbsItem>
+                </PrimerBrandBreadcrumbs>
+
+                <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackDirection.Horizontal } })"
+                                  GapMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackGap.Gap8 } })"
+                                  AlignItemsMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackAlignItems.Center } })"
+                                  DesktopOnly="true">
+
+                    <PrimerInput Type="InputType.Search" BgColor="InputBgColor.Subtle"
+                                 Size="InputSize.Small"
+                                 Value="@basicInput"
+                                 ValueChanged="v => basicInput = v">
+                        <LeadingIcon>
+                            <PrimerIcon Icon="IconName.Search16" Size="IconSize.Small" Color="IconColor.Muted" />
+                        </LeadingIcon>
+                    </PrimerInput>
+
+                    <PrimerButtonGroup>
+                        <PrimerIconButton Size="ButtonSize.Small" Icon="IconName.Copilot16" >
+                        </PrimerIconButton>
+                        <PrimerIconButton Icon="IconName.TriangleDown16" OnClick="ToggleMenu" OnElementReferenceCaptured="OnTargetRefCaptured" />
+                        <PrimerActionMenuOverlay Visible="@ShouldShowOverlay" TriggerRef="@TriggerRef" OnClose="@CloseMenu">
+                            <PrimerActionList ShowDividers="true">
+                                <PrimerActionListItem>Item One</PrimerActionListItem>
+                                <PrimerActionListItem>Item Two</PrimerActionListItem>
+                            </PrimerActionList>
+                        </PrimerActionMenuOverlay>
+                    </PrimerButtonGroup>
+
+                    <PrimerDivider Margin="6px 4px" />
+                    <PrimerIconButton Icon="IconName.Note16" @onclick="OpenSideDialog" />
+                    <PrimerIconButton Icon="IconName.Inbox16" />
+                    <PrimerIconButton Icon="IconName.MarkGithub16" AriaLabelName="Github" />
+                </PrimerBrandStack>
+
+                <PrimerBrandIcon Icon="BrandIconName.ThreeBars16" Size="BrandIconSize.Small"
+                                 MobileOnly="true"
+                                 ClassName="ml-auto mt-1"
+                                 Style="cursor: pointer;"
+                                 @onclick="ToggleSideMenu" />
+            </PrimerBrandStack>
+        </PrimerBrandBox>
+
+        <!-- Body Content -->
+        <PrimerBrandBox Style="flex: 1; overflow-y: auto; min-height: 0;" Padding="BrandBoxPadding.Padding16" Background="BrandBoxBackground.Subtle">
+            @Body
+        </PrimerBrandBox>
+    </PrimerBrandBox>
+</PrimerBrandBox>
+
+<!-- Mobile Menu -->
+<PrimerSideDialog IsOpen="@IsMobileMenuVisible" Style="width:300px;" Position="right" OnClose="@(() => IsMobileMenuVisible = false)">
+    <TitleContent>
+        <PrimerIconButton Icon="IconName.MarkGithub16" Size="ButtonSize.Medium" Variant="ButtonVariant.Invisible" />
+    </TitleContent>
+    <ChildContent></ChildContent>
+</PrimerSideDialog>
+
+<!-- Side Dialog -->
+<PrimerSideDialog IsOpen="@isSideOpen" Title="Note" Style="width:500px" Position="right" OnClose="@(() => isSideOpen = false)">
+    <p>This is a side dialog content.</p>
+</PrimerSideDialog>
+
+@code {
+    private bool isSideOpen = false;
+    private void OpenSideDialog() => isSideOpen = true;
+
+    private string basicInput = "";
+
+    private bool IsMobileMenuVisible = false;
+    private void ToggleSideMenu() => IsMobileMenuVisible = !IsMobileMenuVisible;
+
+    private bool ShouldShowOverlay;
+    private ElementReference TriggerRef;
+
+    private void CloseMenu() => ShouldShowOverlay = false;
+
+    private void ToggleMenu() => ShouldShowOverlay = !ShouldShowOverlay;
+
+    private void OnTargetRefCaptured(ElementReference el) => TriggerRef = el;
+
+    protected override void OnInitialized() => Navigation.LocationChanged += HandleLocationChanged;
+
+    private void HandleLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        CloseMenu();
+        StateHasChanged();
+    }
+
+    public void Dispose() => Navigation.LocationChanged -= HandleLocationChanged;
+
+    private Dictionary<string, bool> toggleStates = new();
+    private bool GetToggleState(string key) => toggleStates.TryGetValue(key, out var value) && value;
+
+    @inject IJSRuntime JSRuntime
+    private async Task OpenExternalLink()
+    {
+        await JSRuntime.InvokeVoidAsync("window.open", "https://primerblazor.com", "_blank");
+    }
+}

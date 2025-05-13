@@ -1,0 +1,60 @@
+﻿@inject IJSRuntime JS
+<div class="d-inline-block">
+  @*   <button class="btn btn-sm" aria-label="@AriaLabel"  @onclick="ToggleTheme">
+        @(IsDarkMode ? "🌙 Dark" : "☀️ Light")
+    </button> *@
+    @if (IsDarkModeInitialized)
+    {
+        <PrimerIconButton Icon="@(IsDarkMode ? IconName.Moon16 : IconName.Sun16)"
+                          Variant="ButtonVariant.Invisible"
+                          Size="ButtonSize.Medium"
+                          AriaLabelName="@AriaLabel"
+                          @onclick="ToggleTheme" />
+    }
+    @* <PrimerIconButton Icon="@(IsDarkMode ? IconName.Moon16 : IconName.Sun16)" Size="ButtonSize.Medium"  AriaLabelName="@AriaLabel" @onclick="ToggleTheme"></PrimerIconButton> *@
+</div>
+
+@code {
+    private bool IsDarkMode { get; set; } = false;
+    private bool IsDarkModeInitialized { get; set; } = false;
+    private Dictionary<string, object>? LightVars;
+    private Dictionary<string, object>? DarkVars;
+    [Parameter] public string? AriaLabel { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var saved = await JS.InvokeAsync<string>("localStorage.getItem", "theme");
+            IsDarkMode = saved == "dark";
+            IsDarkModeInitialized = true;
+            StateHasChanged();
+        }
+    }
+
+    private async Task ToggleTheme()
+    {
+        // if (LightVars == null || DarkVars == null)
+        // {
+        //     // 라이트 테마로
+        //     await JS.InvokeVoidAsync("setTheme", "light");
+        //     await Task.Delay(100);
+        //     LightVars = await JS.InvokeAsync<Dictionary<string, object>>("getCurrentCssVars");
+
+        //     // 다크 테마로
+        //     await JS.InvokeVoidAsync("setTheme", "dark");
+        //     await Task.Delay(100);
+        //     DarkVars = await JS.InvokeAsync<Dictionary<string, object>>("getCurrentCssVars");
+        // }
+
+        // 토글
+        IsDarkMode = !IsDarkMode;
+        var mode = IsDarkMode ? "dark" : "light";
+        //var activeVars = IsDarkMode ? DarkVars : LightVars;
+
+        await JS.InvokeVoidAsync("setTheme", mode);
+
+        // await Task.Delay(50); 
+        // await JS.InvokeVoidAsync("setCssVars", activeVars);
+    }
+}

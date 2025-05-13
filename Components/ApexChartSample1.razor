@@ -1,0 +1,72 @@
+﻿@using ApexCharts
+
+<PrimerCard>
+    <div class="d-flex flex-justify-between">
+        <strong>Total Orders <span class="Label Label--info text-xs">-6.8%</span></strong>
+        <div class="text-xl text-bold">16,247</div>
+    </div>
+
+    <div class="color-fg-muted text-xs mb-2">Last 7 days</div>
+
+    <PrimerApexChart Width="100%"
+                     Height="80px"
+                     ChartOptions="@ChartOptions"
+                     SeriesData="@ChartData"
+                     ShowTitleName="false"
+                     ShowSeriesName="false"
+                     SeriesType="SeriesType.Bar" />
+
+    <div class="d-flex flex-justify-between flex-items-center f6 mt-2">
+        <span class="d-flex flex-items-center">
+            <span class="chart-legend-dot" style="background:#1f6feb"></span>
+            Completed
+        </span>
+        <span>52%</span>
+    </div>
+    <div class="d-flex flex-justify-between flex-items-center f6 color-fg-muted">
+        <span class="d-flex flex-items-center">
+            <span class="chart-legend-dot" style="background:#cdd9e5"></span>
+            Pending Payment
+        </span>
+        <span>48%</span>
+    </div>
+</PrimerCard>
+
+@code {
+    private Dictionary<string, List<DataPoint>> ChartData = new()
+        {
+            ["Completed"] = Enumerable.Range(1, 7).Select(i => new DataPoint { X = $"Day {i}", Y = Random.Shared.Next(20, 40) }).ToList(),
+            ["Pending Payment"] = Enumerable.Range(1, 7).Select(i => new DataPoint { X = $"Day {i}", Y = Random.Shared.Next(10, 20) }).ToList()
+        };
+
+    private ApexChartOptions<DataPoint> ChartOptions = new()
+        {
+            Chart = new Chart
+            {
+                Type = ChartType.Bar,
+                Stacked = true,
+                Sparkline = new ChartSparkline { Enabled = true }
+            },
+            PlotOptions = new PlotOptions
+            {
+                Bar = new PlotOptionsBar
+                {
+                    ColumnWidth = "60%",
+                    BorderRadius = 4
+                }
+            },
+            Xaxis = new XAxis
+            {
+                Labels = new XAxisLabels { Show = false },
+                AxisBorder = new AxisBorder { Show = false },
+                AxisTicks = new AxisTicks { Show = false }
+            },
+            Yaxis = new List<YAxis>
+        {
+            new() { Show = false }
+        },
+            Grid = new Grid { Show = false },
+            Colors = new() { "#1f6feb", "#cdd9e5" },
+            Legend = new Legend { Show = false }
+        };
+}

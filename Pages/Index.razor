@@ -1,0 +1,248 @@
+﻿@page "/"
+@using PrimerBlazor.Demo.Components
+<PageTitle>Dashboard - Primer Blazor</PageTitle>
+
+<PrimerBrandStack DirectionMap="@(new() {{ BrandStackBreakpoint.Narrow, BrandStackDirection.Vertical },{ BrandStackBreakpoint.Regular, BrandStackDirection.Vertical },{ BrandStackBreakpoint.Wide, BrandStackDirection.Horizontal }})"
+                  JustifyContentMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackJustifyContent.SpaceBetween } })"
+                  AlignItemsMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackAlignItems.Center } })"
+                  GapMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackGap.Gap12 } })"
+                  ClassName="p-2">
+
+    <!-- Left Panel -->
+    <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackDirection.Vertical } })"
+                      GapMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackGap.Gap12 } })"
+                      ClassName="flex-1 mb-3">
+
+        <PrimerHeading Level="HeadingLevel.H2">Sales Dashboard</PrimerHeading>
+        <PrimerElement Tag="ElementTag.P" ClassName="color-fg-subtle mb-0">
+            This dashboard provides real-time insights into your sales performance, orders, and customer activity.
+        </PrimerElement>
+
+        <PrimerBrandStack WrapMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackWrap.Wrap } })" ClassName="mt-4 mb-1">
+
+            <PrimerBrandStack AlignItemsMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackAlignItems.Center } })"
+                              GapMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackGap.Gap12 } })"
+                              ClassName="mr-3 mb-3">
+                <PrimerCircleBadge Variant="CircleBadgeVariant.Small" BgColor="CircleBadgeBgColor.Default" IconName="IconName.Graph16" IconColor="CircleBagdeIconColor.Default" />
+                <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackDirection.Vertical } })">
+                    <PrimerHeading Level="HeadingLevel.H4">1,024 Total Sales</PrimerHeading>
+                    <PrimerElement Tag="ElementTag.P" ClassName="color-fg-subtle text-small m-0">This month</PrimerElement>
+                </PrimerBrandStack>
+            </PrimerBrandStack>
+
+            <PrimerBrandStack AlignItemsMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackAlignItems.Center } })"
+                              GapMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackGap.Gap12 } })"
+                              ClassName="mr-3 mb-3">
+                <PrimerCircleBadge Variant="CircleBadgeVariant.Small" BgColor="CircleBadgeBgColor.Default" IconName="IconName.Package16" IconColor="CircleBagdeIconColor.Default" />
+                <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackDirection.Vertical } })">
+                    <PrimerHeading Level="HeadingLevel.H4">$78,500 Revenue</PrimerHeading>
+                    <PrimerElement Tag="ElementTag.P" ClassName="color-fg-subtle text-small m-0">In March 2025</PrimerElement>
+                </PrimerBrandStack>
+            </PrimerBrandStack>
+
+            <PrimerBrandEyebrowBanner Href="javascript:void(0);" Heading="Unlock Premium Sales Insights">
+                <LeadingVisual>
+                    <PrimerBrandIcon Icon="BrandIconName.Graph16" Size="BrandIconSize.Small" />
+                </LeadingVisual>
+            </PrimerBrandEyebrowBanner>
+        </PrimerBrandStack>
+
+        <ApexChartSample0 />
+
+    </PrimerBrandStack>
+
+    <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackDirection.Vertical } })" Style="flex-basis: 50%;">
+        <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackDirection.Horizontal } })"
+                          AlignItemsMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackAlignItems.Center } })"
+                          JustifyContentMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackJustifyContent.SpaceBetween } })"
+                          ClassName="mb-4">
+
+            <PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Narrow, BrandStackDirection.Vertical } })">
+                <PrimerHeading Level="HeadingLevel.H5">Customer & Revenue Overview</PrimerHeading>
+                <PrimerElement Tag="ElementTag.P" ClassName="color-fg-subtle f6 m-0">Summary of key metrics based on recent data</PrimerElement>
+            </PrimerBrandStack>
+
+            <PrimerSelect>
+                <PrimerSelectOption Value="">Mar 1 - 31, 2025</PrimerSelectOption>
+                <PrimerSelectOption Value="">Mar 1 - 31, 2025</PrimerSelectOption>
+            </PrimerSelect>
+        </PrimerBrandStack>
+
+        <PrimerBrandGrid FullWidth="true" PaddingInline="0px" ColumnGap="5px" RowGap="5px">
+            <PrimerBrandGridColumn SpanMap="@(new() {{ BrandBreakpoint.Small, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Medium, BrandGridColumnSpan.Span6 }})">
+                <ApexChartSample2 />
+            </PrimerBrandGridColumn>
+
+            <PrimerBrandGridColumn SpanMap="@(new() {{ BrandBreakpoint.Small, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Medium, BrandGridColumnSpan.Span6 }})">
+                <ApexChartSample1 />
+            </PrimerBrandGridColumn>
+
+            <PrimerBrandGridColumn SpanMap="@(new() {{ BrandBreakpoint.Small, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Medium, BrandGridColumnSpan.Span6 }})">
+                <ApexChartSample3 />
+            </PrimerBrandGridColumn>
+
+            <PrimerBrandGridColumn SpanMap="@(new() {{ BrandBreakpoint.Small, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Medium, BrandGridColumnSpan.Span6 }})">
+                <ApexChartSample4 />
+            </PrimerBrandGridColumn>
+        </PrimerBrandGrid>
+    </PrimerBrandStack>
+</PrimerBrandStack>
+
+<PrimerBrandGrid FullWidth="true" ColumnGap="8px" RowGap="8px" ClassName="mt-3">
+    <PrimerBrandGridColumn SpanMap="@(new() {{ BrandBreakpoint.XSmall, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Small, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Medium, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Large, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.XLarge, BrandGridColumnSpan.Span9 }})">
+        <PrimerDataTable TItem="TableDatas"
+                         Title="Sales Tools Overview"
+                         Subtitle="Latest updates to CRM and analytics tools"
+                         Items="DataTables"
+                         Columns="DataTableColumns"
+                         Density="DataTableDensity.Normal" />
+    </PrimerBrandGridColumn>
+
+    <PrimerBrandGridColumn SpanMap="@(new() {{ BrandBreakpoint.XSmall, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Small, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Medium, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.Large, BrandGridColumnSpan.Span12 },{ BrandBreakpoint.XLarge, BrandGridColumnSpan.Span3 }})">
+        <PrimerBrandBox ClassName="mt-3 mb-2">
+            <PrimerLink Href="javascript:void(0);" Underline="true">
+                🚀 You’ve increased your email campaign engagement
+            </PrimerLink>
+        </PrimerBrandBox>
+
+        <!-- Email Campaign Performance Card -->
+        <PrimerBox ClassName="rounded-2 d-flex flex-column overflow-hidden width-full flex-auto mt-1 mb-1">
+            <PrimerStack Justify="StackJustify.Between" ClassName="px-4 pt-4 pb-0">
+                <PrimerStack Direction="StackDirection.Column">
+                    <PrimerHeading Level="HeadingLevel.H3">Email Campaign Performance</PrimerHeading>
+                    <PrimerElement Tag="ElementTag.P" ClassName="color-fg-muted mb-0 text-small">By Marketing Automation</PrimerElement>
+                </PrimerStack>
+                <PrimerCircleBadge Variant="CircleBadgeVariant.Small" BgColor="CircleBadgeBgColor.Default" IconColor="CircleBagdeIconColor.Default" IconName="IconName.Mail16" />
+            </PrimerStack>
+            <PrimerStack Direction="StackDirection.Column" Justify="StackJustify.Between" ClassName="flex-auto">
+                <PrimerStack Justify="StackJustify.Between" Align="StackAlign.Center" ClassName="pt-2 pb-0 px-4">
+                    <PrimerElement Tag="ElementTag.P" ClassName="color-fg-muted text-normal mb-2">
+                        Monitor open rates, click-through rates, and conversions from the latest email campaigns.
+                    </PrimerElement>
+                </PrimerStack>
+                <PrimerStack Justify="StackJustify.Between" Align="StackAlign.Center" ClassName="pt-1 pb-4 px-4">
+                    <PrimerButton Size="ButtonSize.Small">View Report</PrimerButton>
+                    <PrimerLanguageBadge LanguageName="HTML/Email" ColorCode="#e34c26" ClassName="ml-2" />
+                </PrimerStack>
+            </PrimerStack>
+        </PrimerBox>
+
+        <!-- Sales Pipeline Automation Card -->
+        <PrimerBox ClassName="rounded-2 d-flex flex-column overflow-hidden width-full flex-auto">
+            <PrimerStack Justify="StackJustify.Between" ClassName="px-4 pt-4 pb-0">
+                <PrimerStack Direction="StackDirection.Column">
+                    <PrimerHeading Level="HeadingLevel.H3">Sales Pipeline Automation</PrimerHeading>
+                    <PrimerElement Tag="ElementTag.P" ClassName="color-fg-muted mb-0 text-small">By Sales Ops</PrimerElement>
+                </PrimerStack>
+                <PrimerCircleBadge Variant="CircleBadgeVariant.Small" BgColor="CircleBadgeBgColor.Default" IconColor="CircleBagdeIconColor.Default" IconName="IconName.Workflow16" />
+            </PrimerStack>
+            <PrimerStack Direction="StackDirection.Column" Justify="StackJustify.Between" ClassName="flex-auto">
+                <PrimerStack Justify="StackJustify.Between" Align="StackAlign.Center" ClassName="pt-2 pb-0 px-4">
+                    <PrimerElement Tag="ElementTag.P" ClassName="color-fg-muted text-normal mb-2">
+                        Automate lead assignments, follow-ups, and notifications to speed up your sales cycle.
+                    </PrimerElement>
+                </PrimerStack>
+                <PrimerStack Justify="StackJustify.Between" Align="StackAlign.Center" ClassName="pt-1 pb-4 px-4">
+                    <PrimerButton Size="ButtonSize.Small">Configure</PrimerButton>
+                    <PrimerLanguageBadge LanguageName="CRM Logic" ColorCode="#0052CC" ClassName="ml-2" />
+                </PrimerStack>
+            </PrimerStack>
+        </PrimerBox>
+    </PrimerBrandGridColumn>
+</PrimerBrandGrid>
+
+@code {
+    public class TableDatas
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
+        public DateTime Updated { get; set; }
+        public string Dependabot { get; set; } = string.Empty;
+        public string CodeScanning { get; set; } = string.Empty;
+        public string Action { get; set; } = string.Empty;
+    }
+
+    private List<TableDatas> DataTables = new()
+    {
+        new() { Name = "Revenue Dashboard", Type = "Analytics", Updated = DateTime.Now.AddDays(-1), Dependabot = "High", CodeScanning = "Active", Action="" },
+        new() { Name = "Lead Tracker", Type = "CRM", Updated = DateTime.Now.AddDays(-2), Dependabot = "None", CodeScanning = "Active", Action="" },
+        new() { Name = "Conversion Funnel", Type = "Analytics", Updated = DateTime.Now.AddDays(-3), Dependabot = "Medium", CodeScanning = "Inactive", Action="" },
+        new() { Name = "Customer Segmentation", Type = "Marketing", Updated = DateTime.Now.AddDays(-4), Dependabot = "None", CodeScanning = "Active", Action="" },
+        new() { Name = "Returning Customers", Type = "CRM", Updated = DateTime.Now.AddDays(-5), Dependabot = "High", CodeScanning = "Active", Action="" },
+        new() { Name = "Subscription Analysis", Type = "Analytics", Updated = DateTime.Now.AddDays(-6), Dependabot = "None", CodeScanning = "Inactive", Action="" },
+        new() { Name = "Monthly Growth", Type = "Marketing", Updated = DateTime.Now.AddDays(-7), Dependabot = "High", CodeScanning = "Active", Action="" },
+        new() { Name = "Daily Sales Log", Type = "CRM", Updated = DateTime.Now.AddDays(-8), Dependabot = "None", CodeScanning = "Active", Action="" },
+        new() { Name = "Churn Report", Type = "Analytics", Updated = DateTime.Now.AddDays(-9), Dependabot = "High", CodeScanning = "Inactive", Action="" },
+        new() { Name = "Forecast Model", Type = "Marketing", Updated = DateTime.Now.AddDays(-10), Dependabot = "None", CodeScanning = "Active", Action="" }
+    };
+
+    private List<PrimerDataTableColumn<TableDatas>> DataTableColumns = new();
+
+    protected override void OnInitialized()
+    {
+        DataTableColumns = new()
+        {
+            new("Name", "Asset Name")
+            {
+                HeaderAlign = ColumnAlign.Start,
+                CellAlign = ColumnAlign.Start,
+                Sortable = true
+            },
+            new("Type", "Category", labelSelector: item => new PrimerLabelInfo
+            {
+                Text = item.Type,
+                Color = item.Type switch
+                {
+                    "Analytics" => LabelColor.Accent,
+                    "CRM" => LabelColor.Secondary,
+                    "Marketing" => LabelColor.Open,
+                    _ => LabelColor.Default
+                }
+            })
+            {
+                HeaderAlign = ColumnAlign.Center,
+                CellAlign = ColumnAlign.Center
+            },
+            new("Updated", "Last Updated")
+            {
+                HeaderAlign = ColumnAlign.Center,
+                CellAlign = ColumnAlign.Center,
+                Format = r => r.Updated.ToString("MM/dd/yyyy"),
+                Sortable = true
+            },
+            new("Dependabot", "Lead Priority", labelSelector: item => new PrimerLabelInfo
+            {
+                Text = item.Dependabot,
+                Color = item.Dependabot switch
+                {
+                    "High" => LabelColor.Danger,
+                    "Medium" => LabelColor.Attention,
+                    _ => LabelColor.Default
+                }
+            })
+            {
+                HeaderAlign = ColumnAlign.Center,
+                CellAlign = ColumnAlign.Center
+            },
+            new("CodeScanning", "Status", labelSelector: item => new PrimerLabelInfo
+            {
+                Text = item.CodeScanning,
+                Color = item.CodeScanning == "Active" ? LabelColor.Success : LabelColor.Default
+            })
+            {
+                HeaderAlign = ColumnAlign.Center,
+                CellAlign = ColumnAlign.Center
+            },
+            new("Action", "", cellAlign: ColumnAlign.Between, trailingActions: new()
+            {
+                new DataTableIconAction<TableDatas>(IconName.Download16, EventCallback.Factory.Create<TableDatas>(this, OnIconClicked), ariaLabelName: "Download"),
+                new DataTableIconAction<TableDatas>(IconName.Pencil16, EventCallback.Factory.Create<TableDatas>(this, OnIconClicked), ariaLabelName: "Edit")
+            })
+        };
+    }
+
+    private void OnIconClicked(TableDatas data)
+    {
+        Console.WriteLine($"item: {data.Name}");
+    }
+}

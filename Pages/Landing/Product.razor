@@ -1,0 +1,201 @@
+﻿@page "/product"
+@layout LandingLayout
+<PageTitle>Product - Primer Blazor</PageTitle>
+
+<PrimerBrandStack DirectionMap="@(new() { { BrandStackBreakpoint.Wide, BrandStackDirection.Vertical },  { BrandStackBreakpoint.Regular, BrandStackDirection.Vertical }, { BrandStackBreakpoint.Narrow, BrandStackDirection.Vertical }, { BrandStackBreakpoint.None, BrandStackDirection.Vertical } })"
+                  PaddingMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackPadding.None }, { BrandStackBreakpoint.Narrow, BrandStackPadding.Padding20 }  })"
+                  AlignItemsMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackAlignItems.Center } })"
+                  JustifyContentMap="@(new() { { BrandStackBreakpoint.Regular, BrandStackJustifyContent.Center } })"
+                  Style="min-height: 100vh; width: 100%;">
+
+    <PrimerBrandSubdomainNavBar Fixed="true" LogoImgSrc="/images/logo_small.png"
+                                LogoWidth="30"
+                                LogoHeight="30"
+                                LogoAlt="Product Logo"
+                                Title="Product"
+                                BackHref="/"
+                                HomeHref="/"
+                                ShowBackArrow="false"
+                                ShowLogo="true"
+                                ShowTitle="false"
+                                ShowSeparator="false"
+                                MenuItems="@MenuItems"
+                                PrimaryCtaText="Get Started"
+                                PrimaryCtaHref="#contact"
+                                SecondaryCtaText="Learn More"
+                                SecondaryCtaHref="#overview"
+                                InnerPaddingInline="4px"
+                                SearchEnabled="false" 
+                                ClassName="custom-header"
+                                />
+
+    <PrimerBrandSection Id="section1" PaddingBlockStart="SectionPadding.None" PaddingBlockEnd="SectionPadding.None" IsFullWidth="true">
+        <PrimerBrandHero Label="Introducing"
+                         Heading="Build smarter.<br/>Launch faster."
+                         Description="Product helps modern teams collaborate better and automate their workflows with ease."
+                         Align="BrandHeroAlign.Start"
+                         ImageSrc="/images/hero/dog.png"
+                         ContentSpanMap="@(new Dictionary<BrandBreakpoint, BrandGridColumnSpan> {
+                            { BrandBreakpoint.Medium, BrandGridColumnSpan.Span7 },
+                            { BrandBreakpoint.Large, BrandGridColumnSpan.Span7 }
+                        })"
+                         ImageSpanMap="@(new Dictionary<BrandBreakpoint, BrandGridColumnSpan> {
+                            { BrandBreakpoint.Medium, BrandGridColumnSpan.Span4 },
+                            { BrandBreakpoint.Large, BrandGridColumnSpan.Span4 }
+                        })"
+                         PaddingBottom="0px">
+            <Actions>
+                <PrimerBrandButtonGroup>
+                    <PrimerBrandButton Href="#contact" Variant="BrandButtonVariant.Primary" Size="BrandButtonSize.Medium">
+                        Get Started
+                    </PrimerBrandButton>
+                    <PrimerBrandButton Href="#features" Variant="BrandButtonVariant.Secondary" Size="BrandButtonSize.Medium">
+                        Learn More
+                    </PrimerBrandButton>
+                </PrimerBrandButtonGroup>
+            </Actions>
+        </PrimerBrandHero>
+    </PrimerBrandSection>
+
+    <PrimerBrandSection Id="section2" PaddingBlockStart="SectionPadding.None" IsFullWidth="true">
+        <PrimerBrandGrid RowGap="var(--base-size-24)" PaddingInline="var(--base-size-2)">
+            @foreach (var feature in Features)
+            {
+                <PrimerBrandGridColumn SpanMap="@(new Dictionary<BrandBreakpoint, BrandGridColumnSpan> {
+                    { BrandBreakpoint.XSmall, BrandGridColumnSpan.Span12 },
+                    { BrandBreakpoint.Small, BrandGridColumnSpan.Span12 },
+                    { BrandBreakpoint.Medium, BrandGridColumnSpan.Span6 },
+                    { BrandBreakpoint.Large, BrandGridColumnSpan.Span4 }
+                })">
+                    <PrimerBrandCard HasBorder="true"
+                                     Href="@feature.Href"
+                                     Heading=@(builder => builder.AddContent(0, feature.Title))
+                                     Description=@(builder => builder.AddContent(0, feature.Description))
+                                     Icon=@(builder => builder.AddContent(0, (RenderFragment)(b =>
+                                 {
+                                 b.OpenComponent<PrimerBrandIcon>(0);
+                                 b.AddAttribute(1, "Icon", feature.Icon);
+                                 b.AddAttribute(2, "Size", BrandIconSize.Medium);
+                                 b.CloseComponent();
+                                 })))
+                                     CtaText="Explore" />
+                </PrimerBrandGridColumn>
+            }
+        </PrimerBrandGrid>
+    </PrimerBrandSection>
+
+    <PrimerBrandSection Id="section3" PaddingBlockStart="SectionPadding.None" PaddingBlockEnd="SectionPadding.None" IsFullWidth="true">
+        <PrimerBrandPricing Plans="@SinglePlan" />
+    </PrimerBrandSection>
+  
+    <PrimerBrandSection Id="section4" PaddingBlockEnd="SectionPadding.None" IsFullWidth="true">
+        <PrimerBrandMinimalFooter SocialLinks="@(new() {
+                    new("GitHub", "https://github.com/github", "/images/icons/github-mark.svg", 20, 20),
+                    new("X", "https://x.com/", "/images/icons/x-black.png", 20, 16)
+                })"
+                                  FooterLinks="@(new() {
+                    new("Try Product for free", "javascript:void(0);"),
+                    new("Enterprise", "javascript:void(0);"),
+                    new("Email us", "javascript:void(0);")
+                })">
+            <LogoContent>
+                <PrimerImage Src="/images/logo_small.png" IsCircle="true" Width="30" Height="30" />
+            </LogoContent>
+        </PrimerBrandMinimalFooter>
+    </PrimerBrandSection>
+</PrimerBrandStack>
+
+@code {
+    private List<NavLinkItem> MenuItems = new()
+    {
+        new() { Text = "Overview", Href = "javascript:void(0);" },
+        new() { Text = "Features", Href = "javascript:void(0);" },
+        new() { Text = "Pricing", Href = "javascript:void(0);" },
+        new() { Text = "FAQ", Href = "javascript:void(0);" },
+        new()
+        {
+            Text = "More",
+            Children = new List<NavLinkItem>
+            {
+                new() { Text = "Blog", Href = "#" },
+                new() { Text = "About Us", Href = "#" }
+            }
+        }
+    };
+
+    private class FeatureCardModel
+    {
+        public string Title { get; set; } = "";
+        public string Description { get; set; } = "";
+        public IconName Icon { get; set; }
+        public string Href { get; set; } = "#";
+    }
+
+    private List<FeatureCardModel> Features = new()
+    {
+        new() {
+            Title = "Real-time Collaboration",
+            Description = "Collaborate with your team in real-time using Product’s intuitive tools.",
+            Icon = IconName.Person24,
+            Href = "javascript:void(0);"
+        },
+        new() {
+            Title = "AI Assistance",
+            Description = "Use smart suggestions powered by Product’s AI engine to boost productivity.",
+            Icon = IconName.LightBulb16,
+            Href = "javascript:void(0);"
+        },
+        new() {
+            Title = "Secure by Design",
+            Description = "Built with enterprise-grade security and compliance in mind.",
+            Icon = IconName.ShieldLock16,
+            Href = "javascript:void(0);"
+        }
+    };
+
+    private List<PricingPlan> SinglePlan = new()
+    {
+        new PricingPlan
+        {
+            Title = "Product Basic",
+            Description = "Best for individuals or small teams starting out.",
+            Price = "10",
+            PriceSuffix = "per month",
+            CurrencySymbol = "$",
+            CurrencyCode = "USD",
+            PrimaryActionLabel = "Start Free Trial",
+            SecondaryActionLabel = "Contact Us"
+        }
+    };
+
+    private List<RiverAccordionItem> AccordionItems = new()
+{
+    new()
+    {
+        Heading = "Heading 1",
+        Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sapien sit ullamcorper id.",
+        ActionLabel = "Call to action",
+        ActionHref = "#",
+        ImageSrc = "/images/placeholder-1.png",
+        ImageAlt = "Visual content for item 1"
+    },
+    new()
+    {
+        Heading = "Heading 2",
+        Body = "Aliquam luctus sed turpis felis nam pulvinar risus elementum.",
+        ActionLabel = "Learn more",
+        ActionHref = "#",
+        ImageSrc = "/images/placeholder-2.png",
+        ImageAlt = "Visual content for item 2"
+    },
+    new()
+    {
+        Heading = "Heading 3",
+        Body = "Suspendisse porta efficitur velit. Donec nec eros euismod, euismod nisi eu, efficitur massa.",
+        ActionLabel = "View details",
+        ActionHref = "#",
+        ImageSrc = "/images/placeholder-3.png",
+        ImageAlt = "Visual content for item 3"
+    }
+};
+}
