@@ -1,8 +1,5 @@
 ﻿@inject IJSRuntime JS
 <div class="d-inline-block">
-  @*   <button class="btn btn-sm" aria-label="@AriaLabel"  @onclick="ToggleTheme">
-        @(IsDarkMode ? "🌙 Dark" : "☀️ Light")
-    </button> *@
     @if (IsDarkModeInitialized)
     {
         <PrimerIconButton Icon="@(IsDarkMode ? IconName.Moon16 : IconName.Sun16)"
@@ -11,7 +8,6 @@
                           AriaLabelName="@AriaLabel"
                           @onclick="ToggleTheme" />
     }
-    @* <PrimerIconButton Icon="@(IsDarkMode ? IconName.Moon16 : IconName.Sun16)" Size="ButtonSize.Medium"  AriaLabelName="@AriaLabel" @onclick="ToggleTheme"></PrimerIconButton> *@
 </div>
 
 @code {
@@ -34,27 +30,8 @@
 
     private async Task ToggleTheme()
     {
-        // if (LightVars == null || DarkVars == null)
-        // {
-        //     // 라이트 테마로
-        //     await JS.InvokeVoidAsync("setTheme", "light");
-        //     await Task.Delay(100);
-        //     LightVars = await JS.InvokeAsync<Dictionary<string, object>>("getCurrentCssVars");
-
-        //     // 다크 테마로
-        //     await JS.InvokeVoidAsync("setTheme", "dark");
-        //     await Task.Delay(100);
-        //     DarkVars = await JS.InvokeAsync<Dictionary<string, object>>("getCurrentCssVars");
-        // }
-
-        // 토글
         IsDarkMode = !IsDarkMode;
         var mode = IsDarkMode ? "dark" : "light";
-        //var activeVars = IsDarkMode ? DarkVars : LightVars;
-
         await JS.InvokeVoidAsync("setTheme", mode);
-
-        // await Task.Delay(50); 
-        // await JS.InvokeVoidAsync("setCssVars", activeVars);
     }
 }
